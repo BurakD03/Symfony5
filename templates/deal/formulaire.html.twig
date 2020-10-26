@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-12 col-md-12">
+<form>
+  <div class="form-group">
+    <label for="Name">{{ form_label(form.name) }}</label>
+    <input type="email" class="form-control" id="Name">
+    {{ form_errors(form.name) }}
+  </div>
+  <div class="form-group">
+    <label for="Description">{{ form_label(form.description) }}</label>
+    <textarea class="form-control" id="Description" required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="Prix">{{ form_label(form.price) }}</label>
+    <input type="number" class="form-control" id="prix" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">{{ form_label(form.Envoyer) }}</button>
+  
+</form>
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.price) }}
+            {{ form_row(form.categories) }}
+            {{ form_row(form.Envoyer) }}
+        {{ form_end(form) }}
+      </div>  
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-12 text-center mb-5 mt-5">
+            <h1><b><u>Liste des deals</u> :</b></h1>
+        </div>
+    </div>
+    <div class="row">
+    {# <div class="col-4">
+        <div class="list-group" id="list-tab" role="tablist">
+            {% for deal in deals %}
+                {% if loop.index == 1 %}
+                    <a class="list-group-item list-group-item-action active" id="{{'list-' ~ loop.index ~ '-list'}}" data-toggle="list" href="{{'#list-' ~ loop.index }}" role="tab" aria-controls="{{ loop.index }}">
+                        {{ deal.name }}
+                    </a>
+                {% else %}
+                    <a class="list-group-item list-group-item-action" id="{{'list-' ~ loop.index ~ '-list'}}" data-toggle="list" href="{{'#list-' ~ loop.index }}" role="tab" aria-controls="{{ loop.index }}">
+                        {{ deal.name }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+        {% for deal in deals %}
+                {% if loop.first %}
+                    <div class="tab-pane fade show active" id="{{'list-' ~ loop.index }}" role="tabpanel" aria-labelledby="{{'list-' ~ loop.index ~ '-list'}}">
+                        <b>{{ deal.description }}</b> - écrit le : {{ deal.createdAt|date("m/d/Y") }}
+                    </div>
+                {% else %}
+                    <div class="tab-pane fade show " id="{{'list-' ~ loop.index }}" role="tabpanel" aria-labelledby="{{'list-' ~ loop.index ~ '-list'}}">
+                        <b>{{ deal.description }}</b> - écrit le : {{ deal.createdAt|date("m/d/Y") }}
+                    </div>
+                {% endif %}
+        {% endfor %}
+        </div> #}
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+            {% for categorie in categories %}
+                {% if loop.index == 1 %}
+                    <a class="list-group-item list-group-item-action active" id="{{'list-' ~ loop.index ~ '-list'}}" data-toggle="list" href="{{'#list-' ~ loop.index }}" role="tab" aria-controls="{{ loop.index }}">
+                        {{ categorie.name }}
+                    </a>
+                {% else %}
+                    <a class="list-group-item list-group-item-action" id="{{'list-' ~ loop.index ~ '-list'}}" data-toggle="list" href="{{'#list-' ~ loop.index }}" role="tab" aria-controls="{{ loop.index }}">
+                        {{ categorie.name }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+            {% for categorie in categories %}
+                {% for deal in categorie.deals %}
+                    {% if loop.first %}
+                        <div class="tab-pane fade show active" id="{{'list-' ~ loop.index }}" role="tabpanel" aria-labelledby="{{'list-' ~ loop.index ~ '-list'}}">
+                            <b> {{ deal.name }} / {{ deal.description }}</b> - écrit le : {{ deal.createdAt|date("m/d/Y") }}
+                        </div>
+                    {% else %}
+                        <div class="tab-pane fade show " id="{{'list-' ~ loop.index }}" role="tabpanel" aria-labelledby="{{'list-' ~ loop.index ~ '-list'}}">
+                            <b> {{ deal.name }} / {{ deal.description }}</b> - écrit le : {{ deal.createdAt|date("m/d/Y") }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-12">
+            {% for categorie in categories %}
+                <ul><u>{{ categorie.name }}</u> :</ul>
+                {% for deal in categorie.deals %}
+                        <li>{{ deal.name }}</li>
+                        <li>{{ deal.description }}</li>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="col-12 col-md-12 mt-5 mb-5">
+            <button onclick="window.location.href='{{ path('deal_formulaire') }}'"class="btn btn-dark">Céer un Deal</button>
+        </div>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
